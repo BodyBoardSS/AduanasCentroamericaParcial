@@ -2,31 +2,31 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 
 const { validarCampos } = require('../middlewares/validar-campos');
-
-const { proyectosGet,
-    proyectosPut,
-    proyectosPost,
-    proyectosDelete,
-    proyectosPatch } = require('../controllers/proyectos');
+    
+const { proyectosGetCR,
+    proyectosPutCR,
+    proyectosPostCR,
+    proyectosDeleteCR
+} = require('../controllers/proyectosCR');
 
 
 const router = Router();
 
-router.get('/', proyectosGet );
+router.get('/', proyectosGetCR );
 
 router.post('/',[
     validarCampos
-], proyectosPost );
+], proyectosPostCR );
 
 router.put('/:id',[
     check('id', 'No es un ID válido').isMongoId(),
     validarCampos
-],proyectosPut );
+],proyectosPutCR );
 
 router.delete('/:id',[
     check('id', 'No es un ID válido').isMongoId(),
     validarCampos
-],proyectosDelete );
+],proyectosDeleteCR);
 
 
 module.exports = router;

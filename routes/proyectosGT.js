@@ -7,7 +7,7 @@ const { proyectosGet,
     proyectosPut,
     proyectosPost,
     proyectosDelete,
-    proyectosPatch } = require('../controllers/proyectos');
+    proyectosPatch } = require('../controllers/proyectosGT');
 
 
 const router = Router();

@@ -8,10 +8,11 @@ const autor = "Kevin Manuel Orellana Aguilar - 2522372017"
 const proyectosGet = async(req = request, res = response) => {
 
     const { limite = 5, desde = 0 } = req.query;
+    const query = { pais: 'Guatemala' };
 
     const [ total, proyectos ] = await Promise.all([
         Proyecto.countDocuments(),
-        Proyecto.find()
+        Proyecto.find(query)
             .skip( Number( desde ) )
             .limit(Number( limite ))
     ]);

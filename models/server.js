@@ -7,7 +7,8 @@ class Server{
     constructor(){
         this.app = express()
         this.PORT = process.env.PORT || 3000
-        this.proyectosPath = '/api/proyectos';
+        this.proyectosPath = '/api/proyectos/GT';
+        this.proyectosPathCR = '/api/proyectos/CR';
 
         // Conectar a base de datos
         this.conectarDB();
@@ -30,7 +31,8 @@ class Server{
     }
 
     routes() {
-        this.app.use( this.proyectosPath, require('../routes/proyectos'));
+        this.app.use( this.proyectosPath, require('../routes/proyectosGT'));
+        this.app.use( this.proyectosPathCR, require('../routes/proyectosCR'));
     }
 
     listen(){

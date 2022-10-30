@@ -5,13 +5,14 @@ const Proyecto = require('../models/proyecto');
 const autor = "Kevin Manuel Orellana Aguilar - 2522372017"
 
 
-const proyectosGet = async(req = request, res = response) => {
+const proyectosGetCR = async(req = request, res = response) => {
 
     const { limite = 5, desde = 0 } = req.query;
+    const query = { pais: 'Costa Rica' };
 
     const [ total, proyectos ] = await Promise.all([
         Proyecto.countDocuments(),
-        Proyecto.find()
+        Proyecto.find(query)
             .skip( Number( desde ) )
             .limit(Number( limite ))
     ]);
@@ -23,7 +24,7 @@ const proyectosGet = async(req = request, res = response) => {
     });
 }
 
-const proyectosPost = async(req, res = response) => {
+const proyectosPostCR = async(req, res = response) => {
     
     const {codigo, nombre, monto, pais } = req.body;
     const proyecto = new Proyecto({ codigo, nombre, monto, pais });
@@ -37,7 +38,7 @@ const proyectosPost = async(req, res = response) => {
     });
 }
 
-const proyectosPut = async(req, res = response) => {
+const proyectosPutCR = async(req, res = response) => {
     const { id } = req.params;
     const { _id, codigo, nombre, monto, pais, fecha} = req.body;
 
@@ -49,7 +50,7 @@ const proyectosPut = async(req, res = response) => {
     );
 }
 
-const proyectosDelete = async(req, res = response) => {
+const proyectosDeleteCR = async(req, res = response) => {
     const { id } = req.params;
     const proyecto = await Proyecto.findByIdAndDelete( id );
     const data = {
@@ -64,8 +65,8 @@ const proyectosDelete = async(req, res = response) => {
 
 
 module.exports = {
-    proyectosGet,
-    proyectosPost,
-    proyectosPut,
-    proyectosDelete,
+    proyectosGetCR,
+    proyectosPostCR,
+    proyectosPutCR,
+    proyectosDeleteCR,
 }
